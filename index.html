@@ -23,7 +23,6 @@
         if (xhr.readyState == 4 && xhr.status == 200) {
           var source = xhr.responseText;
           var template = Handlebars.compile(source);
-          console.log("template: " + template);
           callback(template);
         }
       };
@@ -36,10 +35,7 @@
 
       Handlebars.getTemplate('renderers/allsites.handlebars', function (template) {
         var html = template(data);
-        console.log(html);
         var destination = document.querySelector(".introduction");
-        console.log("destination..." + destination.tagName);
-
         destination.innerHTML = html;
       });
 
