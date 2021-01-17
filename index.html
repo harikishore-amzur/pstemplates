@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Postman scripts tester</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js" integrity="sha512-zT3zHcFYbQwjHdKjCu6OMmETx8fJA9S7E6W7kBeFxultf75OPTYUJigEKX58qgyQMi1m1EgenfjMXlRZG8BXaw==" crossorigin="anonymous"></script>  
+    <script src="jquery.js"></script>
+
+  </head>
+  <body>
+    <h1>Postman Test Scripts</h1>
+    <div class="introduction"></div>
+
+    <script>
+      Handlebars.getTemplate = function loadHandlebarsTemplate(url, callback) {
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', url, true);
+          xhr.onreadystatechange = function() {
+              if (xhr.readyState == 4 && xhr.status == 200) {
+                  var raw = xhr.responseText;
+                  var compiled = Handlebars.compile(raw);
+                  callback(compiled);
+              }
+          };
+          xhr.send();     
+      }
+
+      // create context
+      var context = {
+          name: "Sabe"
+      };
+
+      // grab the source
+      var source = Handlebars.getTemplate('./renderers/sample.handlebars', function(context){
+        var html = template(context);
+        console.log(html);
+        // get the element to set the new HTML into
+        var destination = document.querySelector(".introduction");
+
+        // set the new HTML
+        destination.innerHTML = html;
+      });
+
+      // get the HTML after passing the template the context
+
+      
+    </script>
+  </body>
+
+</html>
